@@ -1,0 +1,22 @@
+.foo--bar__baz {
+  color: red;
+  background: blue;
+}
+
+.fizz--pip {
+  color: green;
+  background: blue;
+}
+
+.car__truck--go {
+  color: green;
+  background: yellow;
+}
+
+.foo--bar__baz .fizz--pip {
+  border: 1px solid yellow;
+}
+
+.fizz--pip .car__truck--go {
+  border: 1px solid red;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "css-optimizer-test",
+  "version": "1.0.0",
+  "description": "Testing optimization methods for CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./dist/test/atomic",
+    "build": "rm -rf dist && tsc -p ./tsconfig.json && npm run test",
+    "watch": "watch 'npm run build' src test types-local fixtures --wait=3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amiller-gh/css-optimizer-test.git"
+  },
+  "author": "Adam Miller <ammiller@linkedin.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amiller-gh/css-optimizer-test/issues"
+  },
+  "homepage": "https://github.com/amiller-gh/css-optimizer-test#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.14",
+    "css-size": "^2.0.0",
+    "typescript": "^2.4.2",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "postcss-selector-parser": "^2.2.3"
+  }
+}

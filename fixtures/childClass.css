@@ -1,0 +1,13 @@
+.bar {
+  padding: 10px;
+}
+
+/* Transforms to input .a */
+input .bar {
+  padding: 10px;
+}
+
+/* Should be input .b */
+input .foo {
+  padding: 10px;
+}
