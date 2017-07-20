@@ -10,17 +10,24 @@ import {
 const DELIM = String.fromCharCode(31);
 
 // Converts from number to letter string [a-z]. Like Base26, but with a custom alphabet.
-function convertBase(value: number) {
-  let alphabet: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  let base: number = alphabet.length;
-
-  let new_value = '';
-  while (value > 0) {
-    new_value = alphabet[value % base] + new_value;
-    value = (value - (value % base)) / base;
-  }
-  return new_value || alphabet[0];
-}
+// Credit: https://github.com/ben-eb/postcss-reduce-idents/blob/master/src/lib/encode.js
+function convertBase (num: number): string {
+    let base = 52;
+    let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let character: number = num % base;
+    let result: string = characters[character];
+    let remainder: number = Math.floor(num / base);
+    if (remainder) {
+        base = 64;
+        characters = characters + '0123456789-_';
+        while (remainder) {
+            character = remainder % base;
+            remainder = Math.floor(remainder / base);
+            result = result + characters[character];
+        }
+    }
+    return result;
+};
 
 export default postcss.plugin('atomic', function atomic() {
 
