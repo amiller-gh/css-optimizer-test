@@ -1,0 +1,33 @@
+<html>
+  <body>
+
+    <style>
+      .foo { color: red; background: blue; } /* a b */
+      .bar { color: green } /* c */
+      .baz { color: yellow; background: red; overflow: hidden; } /* d e f */
+      .foo.baz { color: orange; }
+      .foo.bar { color: pink; }
+    </style>
+    <style>
+      .a { color: red; }
+      .b { background: blue; }
+      .c { color: green; }
+      .d { color: yellow; }
+      .e { background: red; }
+      .f { overflow: hidden; }
+      .a.b.d.e.f {
+        color: orange;
+      }
+      .a.b.c._._ {
+        color: pink;
+      }
+    </style>
+
+    <div class="foo baz">foo baz</div>
+    <div class="foo baz bar">foo baz bar</div>
+    <hr>
+    <div class="a b d e f _">a b d e</div>
+    <div class="a b c d e f _">a b c d e</div>
+
+  </body>
+</html>

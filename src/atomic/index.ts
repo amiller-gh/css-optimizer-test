@@ -11,22 +11,15 @@ const DELIM = String.fromCharCode(31);
 
 // Converts from number to letter string [a-z]. Like Base26, but with a custom alphabet.
 function convertBase(value: number) {
-  let from_range: string[] = '0123456789'.split('');
-  let to_range: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  let from_base: number = from_range.length;
-  let to_base: number = to_range.length;
-
-  let dec_value: number = value.toString().split('').reverse().reduce(function (carry: number, digit: string, index: number) {
-    if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
-    return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
-  }, 0);
+  let alphabet: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  let base: number = alphabet.length;
 
   let new_value = '';
-  while (dec_value > 0) {
-    new_value = to_range[dec_value % to_base] + new_value;
-    dec_value = (dec_value - (dec_value % to_base)) / to_base;
+  while (value > 0) {
+    new_value = alphabet[value % base] + new_value;
+    value = (value - (value % base)) / base;
   }
-  return new_value || to_range[0];
+  return new_value || alphabet[0];
 }
 
 export default postcss.plugin('atomic', function atomic() {
