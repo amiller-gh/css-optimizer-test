@@ -1,0 +1,22 @@
+.foo {
+  color: red;
+  background: blue;
+}
+.bar {
+  color: green
+}
+.baz {
+  color: yellow;
+  background: red;
+  overflow: hidden;
+}
+.foo.baz {
+  color: orange;
+}
+.bar.baz {
+  background: pink;
+}
+.foo.bar {
+  color: pink;
+  background: red;
+}

@@ -36,6 +36,18 @@
       ],
       "postcss-selector-parser": [
         "../../types-local/postcss-selector-parser"
+      ],
+      "specificity": [
+        "../../types-local/specificity"
+      ],
+      "postcss-remove-prefixes": [
+        "../../types-local/postcss-plugin"
+      ],
+      "autoprefixer": [
+        "../../types-local/postcss-plugin"
+      ],
+      "postcss-merge-rules": [
+        "../../types-local/postcss-plugin"
       ]
     }
   },

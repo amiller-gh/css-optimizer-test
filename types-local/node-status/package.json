@@ -1,0 +1,7 @@
+{
+  "dependencies": {},
+  "description": "TypeScript definitions for specificity 0.3.1",
+  "name": "@types/specificity",
+  "typings": "index.d.ts",
+  "version": "0.3.1"
+}
