@@ -12,6 +12,17 @@ import {
 // unicode / ascii extended bloats file size. Capital B for Blocks it is!
 const PADDING_CLASS = '.B';
 
+// function getKeySelector(rule: Rule): string | undefined {
+//   let root: selParser.Root = selParser().process(rule.selector).res;
+//   let nodes: selParser.Node[][] = root.split(selector => { return selector.type === 'combinator'; });
+//   let keySel: selParser.Node[] | undefined = nodes.pop();
+//   if ( !keySel ) {
+//     return undefined;
+//   }
+//
+//
+// }
+
 // Return if rule a conflicts with any declarations in rule b
 function conflicts(a: Rule, b: Rule): boolean{
   let decls: Set<string> = new Set();

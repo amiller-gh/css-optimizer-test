@@ -48,6 +48,9 @@
       ],
       "postcss-merge-rules": [
         "../../types-local/postcss-plugin"
+      ],
+      "cssnano": [
+        "../../types-local/postcss-plugin"
       ]
     }
   },

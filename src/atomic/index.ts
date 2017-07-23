@@ -17,7 +17,7 @@ export default postcss.plugin('atomizer', function atomic() {
 
     // Convert all classes to atomics
     let res: AtomicResult = atomize(root);
-
+    console.log(res.classes);
     // Re-balance specificity of all rulesets
     rebalance(root);
 

@@ -39,8 +39,12 @@ export default function atomize(root: Root): AtomicResult{
 
   console.log('–'.yellow, 'Atomizing');
 
-  // Saves a reference from css `prop: value` pair, to expected atomic class name
+  // Saves a reference from css `prop: value` pair, to expected full atomic class name
   let atomics: Map<string, string> = new Map();
+
+  // Saves a reference from css `prop: value` pair, to expected unique atomic class name
+  let uniqueAtomics: Map<string, string> = new Map();
+
 
   // Saves a reference from old class name to set of atomic class names.
   let classMappings: Map<string, Set<string>> = new Map();
@@ -55,9 +59,7 @@ export default function atomize(root: Root): AtomicResult{
     // Save a set of atomic class concerns for this ruleset.
     let concerns: Set<string> = new Set();
 
-    // If this selector contains anything other than classes and ids we need to keep
-    // TODO: Selector lists can and should be broken out if the parts allow it.
-    //       ex: `.foo, input` can be broken out into two rules.
+    // If this selector contains anything other than classes and ids we need to keep it intact
     let shouldRemove = true;
     function invalidate(){ shouldRemove = false; }
     selectors.walkCombinators(invalidate);
@@ -74,6 +76,7 @@ export default function atomize(root: Root): AtomicResult{
     // and add it to this ruleset's set of atomic class concerns.
     // TODO: Assumes that combinator rules will never define new classes. Fix this.
     if (shouldRemove) {
+
       rule.walkDecls(function (decl: Declaration) {
 
         let identifier: string = decl.prop + DELIM + decl.value;
@@ -111,8 +114,13 @@ export default function atomize(root: Root): AtomicResult{
 
   // Convert all associated atomic class sets to their final string form.
   let classes: Map<string, string> = new Map();
+  let uniqueClassMappings: Map<string, string> = new Map();
+
   classMappings.forEach((set: Set<string>, srcClass: string) => {
     let classList: string[] = [];
+    let uniqueClass = convertBase(counter++);
+    classList.push(uniqueClass);
+
     set.forEach((atomicClass: string) => { classList.push(atomicClass); });
 
     if ( !classList.length ) {
@@ -121,6 +129,7 @@ export default function atomize(root: Root): AtomicResult{
 
     classes.set(srcClass, classList.sort().join('.'));
     classMappings.delete(srcClass);
+    uniqueClassMappings.set(srcClass, uniqueClass);
   });
 
   // For each rule
@@ -133,7 +142,7 @@ export default function atomize(root: Root): AtomicResult{
     selectors.walkClasses((classObj: selector.ClassName) => {
 
       let oldClass: string = classObj.value;
-      let newClass: string | undefined = classes.get(oldClass);
+      let newClass: string | undefined = uniqueClassMappings.get(oldClass);
 
       if (!newClass){
         throw new Error(`No atomic class found for class ${oldClass}`)
